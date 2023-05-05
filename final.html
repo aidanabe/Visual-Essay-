@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Prototype techniques</title>
+	<link href="https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<script src="https://unpkg.com/intersection-observer"></script>
+	<script src="https://unpkg.com/scrollama"></script>
+</head>
+<style type="text/css">
+	body, html {
+		top:0;
+		left:0; 
+		margin:0;
+		font-family:'Times New Roman', serif;
+	}
+	nav	{
+		background-color:white;
+		position:fixed;
+		width:100%;
+		display:flex;
+		justify-content: center;
+		align-items:center;
+		z-index:100;
+	}
+	.title {
+		height:50vh;
+		color:white;
+		background-color:darkred;
+/*		background-image:url('https://i.pinimg.com/originals/7f/43/1c/7f431c9e6991b1a83d79e359dc09c99d.gif');*/
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-position: left top;
+		background-size: auto 100%;
+	}
+	.title h1 {
+		font-size:5em;
+	}
+	.title h2 {
+		font-size:1em;
+		font-weight:400;
+	}
+	.header {
+		text-align:center;
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		border:0.5em darkred;
+		padding:5% 0%;
+		animation: fadeIn 0.5s ease-in-out;
+	}
+	.header h1{
+		font-family:'Times New Roman', serif;
+		font-weight:800;
+		margin:0;
+	}
+	.header h2 {
+		margin:0;
+	}
+	.sticky {
+		float:right;
+		top:25%;
+		position:sticky;
+		width:50%;
+		display:inline-flex;
+		background-color:white;
+	}
+	.leftside{
+		background-color:darkred;
+		color:white;
+		width: 30%;
+    	padding: 5% 10% 5% 5%;
+	}
+	.progressive{
+		width:100%;
+		display:block;
+		margin-bottom:100%!important;
+	}
+	.end {
+		margin-bottom:5%!important;
+	}
+	#counter {
+		width:100%;
+		font-size:10em;
+		text-align:center;
+		margin:0;
+		padding:0%;
+		line-height:1em;
+		font-weight: 800;
+    	letter-spacing: -0.05em;
+	}
+	#counter h2{
+		text-align:center;
+	}
+	.text {
+		margin:5%;
+		line-height:2em;
+		opacity:0;
+		margin-top:10%;
+		transition:0.5s ease-in-out;
+	}
+	.text h1 {
+		font-size:4em;
+		letter-spacing:-0.05em;
+		line-height:1em;
+		font-weight:900;
+		width:60%;
+	}
+	.text h2 {
+		font-weight:400;
+		font-size:1em;
+		font-style:italic;
+	}
+	.sticky h1 {
+		width:100%;
+		font-size:3em;
+	}
+	.sticky h2 {
+		font-size:0.8em;
+		text-transform:uppercase;
+		letter-spacing:0.1em;
+	}
+	.center_aligner {
+		overflow:none;
+		width:100%;
+		display:flex;
+		align-items:center;
+		justify-content:center;
+		margin:2% 0%;
+	}
+	iframe {
+		border:0.5em solid black;
+		width:900px;
+		height:500px;
+	}
+	.tableauPlaceholder{
+		width:50%;
+		z-index:0;
+	}
+	img{
+		text-align:center;
+		margin:0%;
+		display:inline-block;
+		border:0.5em solid black;
+	}
+	.caption {
+		font-size:0.8em;
+		color:#666666;
+	}
+	.small {
+		width:30%;
+	}
+	.large {
+		width:80%;
+		display:block;
+	}
+	@keyframes fadeIn {
+		0%{
+			opacity:0;
+		}
+		100%{
+			opacity:1;
+		}
+	}
+	@media screen and (max-width:767px){
+		.sticky {
+	/*		bottom:0;*/
+			width:50%;
+			float:none;
+			margin:auto;
+			display:flex;
+			line-height:2em;
+		}
+		.sticky h1 {
+			font-size:2em;
+			line-height:2em;
+		}
+		.sticky h2 {
+			font-size:0.5em;
+		}
+		#counter {
+			font-size:5em;
+		}
+		.leftside {
+			width: 85%;
+    		padding: 5% 10% 5% 5%;
+		}
+		.small {
+			width:80%;
+		}
+		.title {
+			height:80vh;
+		}
+		.text h1 {
+			font-size:2.5em;
+			width:80%;
+		}
+		.text {
+			margin:10% 5%;
+		}
+		iframe {
+			height:300px;
+		}
+
+	}
+</style>
+<body>
+
+<!-- nav -->
+<nav>
+	<h3>Legacy of Alexander the Great</h3>
+</nav>
+
+<!-- text -->
+<div class='header title step'>
+	<div class='aligner'>
+		<h1>Alexander the Great</h1>
+		<h2>The Creation of a Sublime Legacy</h2>	
+	</div>
+</div>
+
+<!-- image 2 -->
+<div class='center_aligner'>
+	<!-- change line 120 if you want to change the size of the image -->
+	<img class='large' src="images/2.jpg"> 	
+</div>
+<!-- caption for image 2 -->
+<div class='center_aligner'>
+	<div class='caption'>The Battle of Issus Moscaic from the House of the Faun, Pompeii (120-100 B.C.E)</div>	
+</div>
+
+
+
+<div class='text'>
+	<h2>Introduction</h2>	
+	Alexander the Great was an extremely powerful leader who guided his army into conquering civilization by civilization, winning every single battle that he participated in. He was ambitious and determined, and his great vision guided him across the world, rewriting history as his empire grew. Alexander was born in 356 B.C. in Macedonia. His father was King Philip II and his mother was Queen Olympias. When Alexander was 20, his father was assassinated which resulted in him taking over the throne, but his young age did not stop him from becoming a glorious leader which he was destined to be.
+</div>
+
+<div class='text'>
+	<h1>“I am not afraid of an army of lions led by a sheep; I am afraid of an army of sheep led by a lion.”</h1>
+	Alexander decided to pursue his father’s dream of conquering the Persian Empire, on the course of which he also managed to obtain control over Egypt where he was accepted as the new Pharaoh with practically no resistance since they saw him as their liberator from Persia’s oppression. Alexander clashed with the Persian King Darius III at the Battle of Issus, where the Macedonian army defeated him. Darius fled from the battle, leaving his army, wife, daughters, and mother behind. Alexander chased him down across Persia, simultaneously gaining control over major cities. The two once again confronted each other at the famous battle of Gaugamela; Alexander defeated Darius once more, after which the Persian King ran from the battlefield (again). After Alexander’s victory, he was accepted by the Persians as their new ‘Great King’.
+</div>
+
+
+<!-- image 1 -->
+<div class='center_aligner'>
+	<!-- change line 120 if you want to change the size of the image -->
+	<img class='large' src="images/4.jpg"> 	
+</div>
+<!-- caption for image 1 -->
+<div class='center_aligner'>
+	<div class='caption'>Alexander the Great's Empire</div>	
+</div>
+
+
+<!-- tableau public -->
+<div class='center_aligner'>
+	<!-- insert tableau public embed link below this line -->
+	<div class='tableauPlaceholder' id='viz1682091404793' style='position: relative'><noscript><a href='#'><img alt='Sheet 3 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;SW&#47;SWZ9N7PHK&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;SWZ9N7PHK' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;SW&#47;SWZ9N7PHK&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1682091404793');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+</div>
+
+<div class='text'>
+	<h1>“There is nothing impossible to him who will try.”</h1>
+
+<div class='text'>
+	<h2>Pursuing Asia Further</h2>	
+After securing Persia, he traveled East. Alexander found over 70 cities (most of which he called after himself), scattered across the Middle East, Middle Asia, and South Asia. In Bactria (modern-day Afghanistan) he managed to capture the Sogdian Rock, which was considered to be impossible. Bactria surrendered to him and threw him a banquet in a show of respect. It was then when Alexander met his first wife Roxane of Bactria. He married at the age of 29.
+By 327 B.C., Alexander was already considered to be the King of Asia, yet he was still set on conquering further. He marched on to India, where he participated in a couple of battles before his army protested on wanting to return home to Macedonia. Alexander decided to turn back, taking a route across the Gedrosian Desert which he believed to be a short way back home. It is described to be Alexander’s greatest mistake since he lost thousands of his people in the 60-day march across the ruthless desert. His army managed to make it to Persia, where they were supposed to rest before coming back to Macedonia.
+</div>
+
+<!-- interactive embed, adjust the width and height as necessary, copy lines 155 to 157 to create a new interactive embed --> 
+<div class='center_aligner'>
+	<iframe src="interactive.html" frameBorder=0 scrolling=no></iframe>
+</div>
+
+
+<div class='text'>
+	<h1>“There is nothing impossible to him who will try.”</h1>
+<div class='text'>
+	<h2>Death of the Divine</h2>	
+In 324 B.C, Alexander’s closest life-long friend and partner Hephaistion died from an illness, which had caused Alexander unimaginable grief. He shaved his head, fasted for several days, and killed hundreds as a sacrificial offering in the memory of Hephaistion. Alexander’s death followed a few months after; it is said that he spent those last months in serious depression, drinking excessively, and acting in an unstable manner. In 323 B.C, at the age of 32, Alexander died in Babylon in circumstances that remain a mystery to this day.
+</div>
+
+
+<!-- counter -->
+<div class='header sticky step' id='dynamic_sticky1'>
+</div>
+
+
+<div class='leftside'>
+
+	<div class='text progressive'>
+	<h1>Birth</h1>
+	Alexander the Great is Born to King Philip II of Macedonia Queen Olympias of Epirus.
+	</div>
+
+	<div class='text progressive'>
+	<h1>Long Live The King</h1>
+	At the age of 20 Alexander became the King of Macedonia after his father’s assassination.
+	</div>
+
+	<div class='text progressive'>
+	<h1>The Persian Quest Begins</h1>
+	Battle of the Granicus takes place. It is the first major battle against the Persian Empire. 
+	</div>
+
+		<div class='text progressive'>
+	<h1>The Gordian Knot & The Battle of Issus</h1>
+The famous legend of The Gordian Knot took place. 
+(The Gordian Knot is a legend about how Alexander the Great outwitted an ancient puzzle. The prophecy of the Gordian Knot stated that whoever untied the knot would become the king of all Asia, but the knot was seemingly impossible to untie. When Alexander came across it he decided to do so by simply cutting through it with his sword. Considering that Alexander did eventually become the King of all Asia, one could say that the prophecy came true.)
+
+The Battle of Issus took place. Alexander faced Darius III (the King of the Persian Empire) for the first time. Darius fled the battle. 
+ 
+	</div>
+
+		<div class='text progressive'>
+	<h1>Son of Ammon-Zeus</h1>
+	Alexander became the Pharaoh of Egypt after liberating them from the Persians. Was proclaimed as the ‘Son of Ammon-Zeus’ by the Oracle of Siwah.
+	</div>
+
+		<div class='text progressive'>
+	<h1>Persia's Defeat</h1>
+	The Battle at Gaugamela was the third and final battle between Alexander and Darius. Though vastly outnumbered, Alexander won, soon after which he became the new King of Persia, and Darius fled once again from the battle (but was later killed by his own men).  
+	</div>
+
+		<div class='text progressive'>
+	<h1>The Bactrian Marriage</h1>
+	Battle after battle, Alexander's empire stretched further east across Asia. He succeeded in capturing the Sogdian Rock, after which he built allyship with the Sogdians and Bactrians by marrying Roxana, his first wife.  
+	</div>
+
+		<div class='text progressive'>
+	<h1>The Empire's Limit</h1>
+	After finally reaching India the Battle of Hydaspes against King Porus took place. Alexander’s army won but suffered many casualties and Alexander’s horse Buchephalus died. It was the last major battle for his army. 
+	</div>
+
+		<div class='text progressive'>
+	<h1>The Desert March</h1>
+	After several revolts, Alexander had agreed to turn his army back and return to Persia (while also agreeing to let many Macedonian veterans return home). Their returning route from Asia passed through the Gedrosian Desert, in which they lost track for many days and many of his people died. 
+	</div>
+
+		<div class='text progressive'>
+	<h1>The Final Return</h1>
+	Alexander’s army finally returned to Persepolis after many years of battles. They then made their way to Susa where many celebrations including a mass-marriage of Macedonians and Persians took place. After Susa Alexander moved to Ektabana where his life-long partner and friend Hephaestion died.  
+	</div>
+
+		<div class='text progressive end'>
+	<h1>Death</h1>
+	For several months that followed Alexander suffered from deep depression. One day he caught a fever after a celebration which developed into a severe illness. A few days later Alexander the Great died.  
+	</div>
+
+</div>
+
+
+
+<div class='text'>
+	<h1>Greatness is Immortal</h1>
+	As Alexander spread his army across various ancient civilizations such as Egypt, Persia, Greece, India and others, he left a great legacy behind, parts of which still exist in the modern days. He had a strong influence on the places which he conquered, impacting the culture and education. Under his army, religions and traditions were exchanged. After his death, various myths and legends were born, based on him, and even in some civilizations, he was seen as a deity. What many see as the most important aspect of the legacy is Alexander the Great himself. Even to this day, he continues to fascinate people, making him one of the most studied figures in human history. The way people still see him as an exceptional leader even after 2300 years since his existence proves how truly great he was.
+</div>
+
+<!-- image 3 -->
+<div class='center_aligner'>
+	<img class='large' src="images/2.png"> 	
+</div>
+
+</body>
+<script type="text/javascript">
+
+// instantiate the scrollama
+const scroller = scrollama();
+const scroller2 = scrollama();
+
+scroller
+  .setup({
+    step: ".text",
+    offset: 0.9,
+  })
+  .onStepEnter(response => {
+    // { element, index, direction }
+    el=response.element;
+    el.style.opacity=1;
+    el.style.marginTop='5%';    
+  })
+  .onStepExit(response => {
+    // { element, index, direction }  
+    el=response.element;
+  })
+  ;
+ // setup resize event
+window.addEventListener("resize", scroller.resize);
+
+scroller2
+  .setup({
+    step: ".progressive",
+    offset: 0.6,
+  })
+  .onStepEnter(response => {
+    // { element, index, direction }
+    el=response.element;
+    el.style.opacity=1;
+    if(response.index==0 || 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 || 11){
+    	stick('dynamic_sticky1')
+    	response.direction=='down'
+    	if(response.index==0){
+    		count(1,356,1,'Year','B.C.E.','dynamic_sticky1')
+    	} else if (response.index==1){
+    		count(1,336,.1,'Year','B.C.E.','dynamic_sticky1')
+    	} else if (response.index==2){
+    		count(0,334,.1,'Year','B.C.E.','dynamic_sticky1')
+    	} else if (response.index==3){
+    		count(0,333,.1,'Year','B.C.E.','dynamic_sticky1')
+    	} else if (response.index==4){
+    		count(0,332,.1,'Year','B.C.E.','dynamic_sticky1')
+    	} else if (response.index==5){
+    		count(0,331,.1,'Year','B.C.E.','dynamic_sticky1')
+    	} else if (response.index==6){
+    		count(0,330,.1,'Year','B.C.E.','dynamic_sticky1')
+    	} else if (response.index==7){
+    		count(0,327,.1,'Year','B.C.E.','dynamic_sticky1')
+    	} else if (response.index==8){
+    		count(0,326,.1,'Year','B.C.E.','dynamic_sticky1')
+    	} else if (response.index==9){
+    		count(0,325,.1,'Year','B.C.E.','dynamic_sticky1')
+    	} else if (response.index==10){
+    		count(0,324,.1,'Year','B.C.E.','dynamic_sticky1')
+    	} else if (response.index==11){
+    		count(0,323,.1,'Year','B.C.E.','dynamic_sticky1')
+    	}
+
+    }
+  })
+  .onStepExit(response => {
+    // { element, index, direction }  
+    el=response.element;
+    console.log(response.index)
+    if(response.index==11){
+    	unstick('dynamic_sticky1')
+    }
+    el.style.opacity=0;
+  })
+  ;
+ // setup resize event
+window.addEventListener("resize", scroller2.resize);
+
+function count(number1, number2, step, title, label, location_id, prefix='', suffix=''){
+	target = document.querySelector('#'+location_id)
+	console.log(target)
+	let text=number1;
+
+	setInterval(function(){
+		if(text!=number2){
+			num = text+step
+			if(num % 1 == 0){
+				text = num
+			} else {
+				text = parseFloat(num.toFixed(2))
+			}
+			target.innerHTML="<div class='aligner'><h1>"+title+"</h1><div id='counter'>"+prefix+text+suffix+"</div><h2>"+label+"</h2></div>"
+		}
+	}, 30);
+}
+
+function stick(location_id){
+	target = document.querySelector('#'+location_id)
+	target.style.position="sticky"
+}
+
+function unstick(location_id){
+	target = document.querySelector('#'+location_id)
+	target.style.position="relative"
+}
+
+</script>
+
+</html>
